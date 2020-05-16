@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Edit Blog Post{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+
+        <h1 class="text-monospace">Удалить пост...</h1>
+        <br><br>
+        <h3>Удалить: {{post.title}}</h3>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                <em>Вы уверены?</em><br>
+                <button class="btn btn-warning">Удалить</button>
+            </form>
+        </div>
+    {% endif %}
+{% else %}
+    Вы не можете удалить пост, так как вы не зарегестрированны!
+{% endif %}
+{% endblock %}

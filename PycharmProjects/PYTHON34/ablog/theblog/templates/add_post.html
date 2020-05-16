@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Create A New Post
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <h1 class="text-monospace">Добавить пост...</h1>
+    <br><br>
+    <div class="form-group">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            Если хотите применить нижеперичисленные функции, пишите их <strong>без пробелов!</strong><br>
+            < br > - Перенос строки&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            < strong >< /strong > - <strong>Жирный текст</strong>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+            < em >< /em > - <em>Наклонный текст</em><br><br>
+            <button class="btn btn-warning">Добавить</button>
+        </form>
+    </div>
+    <script>
+        var name = '{{ user.id }}'
+        document.getElementById('elder').value
+            = name;
+
+    </script>
+
+{% else %}
+    Вы не зарегистрированны!!
+{% endif %}
+{% endblock %}
