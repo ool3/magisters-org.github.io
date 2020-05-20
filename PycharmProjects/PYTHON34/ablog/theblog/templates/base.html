@@ -22,56 +22,53 @@
     }
     a:hover{
         text-decoration: none;
-        color: #000;
+        color: red;
     }
+    .myfield{
+            border:1px solid #ccc; 
+            border-radius:5px;
+            height:25px;
+            width:200px;
+            margin: 10px 10px 10px 0;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'home' %}">It балаган</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="https://image.flaticon.com/icons/svg/1753/1753918.svg" width="30" height="30" class="navbar-brand d-inline-block align-top" alt="">It балаган</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            {% if user.is_authenticated %}
-            {% if cat_menu %}
             <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Категории
-            </a>
+        <a style="cursor: pointer;" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Кликни</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if user.is_authenticated %}
 
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for item in cat_menu %}
-                    <a style="text-align: center;" class="dropdown-item" href="{% url 'category' item|slugify%}">{{item}}</a><br>
-                    {% endfor %}
-                </div>
-            </li>
+                <a class="dropdown-item" href="{% url 'add_post' %}">Задать вопрос</a>
+                <div class="dropdown-divider"></div>  
+            {% if cat_menu %}
+                <a class="dropdown-item" href="{% url 'category_list' %}">
+                  Категории
+                </a>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'category_list' %}">Категории</a>
-            </li>
+                <a class="dropdown-item" href="{% url 'category_list' %}">Категории</a>
             
             {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_post' %}">Добавит пост</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
-            </li>
-            
 
+                <a class="dropdown-item" href="{% url 'popular_list' %}">Популярные вопросы</a> 
+                <a class="dropdown-item" href="{% url 'new_list' %}">Новые вопросы</a> 
+                <div class="dropdown-divider"></div>
+
+                <a class="dropdown-item" href="{% url 'logout' %}">Выйти</a>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Зарегестрироваться</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Войти</a>
-            </li>
-
+                <a class="dropdown-item" href="{% url 'register' %}">Зарегестрироваться</a>
+                <a class="dropdown-item" href="{% url 'login' %}">Войти</a>
             {% endif %}
+        </div>
+      </li>
+            
         </ul>
     </div>
 </nav>

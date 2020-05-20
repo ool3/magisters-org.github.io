@@ -5,5 +5,7 @@
 {% for item in cat_menu_list %}
     <a class="dropdown-item" href="{% url 'category' item|slugify%}">{{item}}</a><br>
 {% endfor %}
-<a href="{% url 'add_category' %}" style="text-align: center;">Добавить категорию</a>
+{% if user.id == 1%}
+	<a href="{% url 'add_category' %}" style="text-align: center;">Добавить категорию</a>
+{% endif %}
 {% endblock %}

@@ -2,7 +2,9 @@
 {% block content %}
 
 
-<h1 class="text-monospace"><p class="w-60 p-1">It Posts</p></h1>
+<h1 class="text-monospace"><p class="w-60 p-1" style="свcd
+    text-shadow: 4px 3px 7px black;
+">It Questions</p></h1>
 <ul>
     {% for post in object_list %}
     <li><a href="{% url 'article_detail' post.pk %}">{{post.title}}</a> - <a

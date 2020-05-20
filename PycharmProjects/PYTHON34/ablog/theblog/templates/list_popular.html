@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<ol>
+{% for item in popular_list %}
+		{% if item == first %}
+			<li style="color: yellow;font: 2em Arial, sans-serif; text-shadow: black 0 0 2px;"><a href="{% url 'article_detail' item.pk %}">{{item.title}}</a><br></li>&#129351;
+			{{item.body|safe|slice:"100"}}
+			<hr>
+		{% elif item == second %}
+			<li style="color: #c0c0c0;font: 2em Arial, sans-serif; text-shadow: black 0 0 2px;"><a href="{% url 'article_detail' item.pk %}">{{item.title}}</a><br></li>&#129352;
+			{{item.body|safe|slice:"100"}}
+			<hr>
+		{% elif item == fird %}
+			<li style="color: #cd7f32;font: 2em Arial, sans-serif; text-shadow: black 0 0 2px;"><a href="{% url 'article_detail' item.pk %}">{{item.title}}</a><br></li>&#129353;
+			{{item.body|safe|slice:"100"}}
+			<hr>
+		{% endif %}
+{% endfor %}
+</ol>
+{% endblock %}

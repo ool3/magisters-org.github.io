@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% block title %} {{post.title_tag}} {% endblock %}
 {% block content %}
 <h1>{{post.title}}</h1>
+{{post.post_date}}<br>
 <small>By:
     {{post.author.username}}</small><br>
 <p class="alert alert-primary" role="alert">{{post.body|safe}}</p>
-<strong><a class="btn btn-secondary btn-lg" href="{% url 'home' %}">Back</a></strong>
+<strong><input class='btn btn-light btn-lg' type="button" onclick="history.back();" value="Back"/></strong>
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
             <a type="button" href="{% url 'delete_post' post.pk  %}" class="btn btn-outline-danger btn-lg">Delete</a>
@@ -31,5 +31,23 @@
         {% endif %}
     {% else %}
         <small><a href="{% url 'login' %}">Зарегистрируйся</a> для доступа к кнопке</small>
-    {% endif %}
+    {% endif %} 
+<br><br>
+{% if latest_comment_list %}
+    {% for c in latest_comment_list %}
+     <strong>{{c.author_name}}</strong><br>
+     {{c.comment_text}}
+    {% endfor %}
+{% else %}
+    Комментарии не найдены
+{% endif %}
+<form action="{% url 'article_detail' article.id %}" method="POST">
+    
+        {% csrf_token %}
+        <input type="text" name="name" required placeholder="ваше имя"><br>
+        <textarea name='text' required="" cols="20" rows="5"></textarea><br>
+        <button type="submit">Оставить комментарий</button>
+        
+</form>
+
 {% endblock %}
